@@ -42,10 +42,12 @@ function DisplayTodo() {
             `<div class="form-check">
                 <input class="form-check-input" type="checkbox" id="task-${index}" ${taskObj.completed ? 'checked' : ''}>
                 <label class="form-check-label ${taskObj.completed ? 'completed' : ''}" for="task-${index}">${taskObj.text}</label>
-            </div>`
+                <button class="btn btn-danger btn-sm delete-btn"><i class="bi bi-trash-fill"></i></button>
+            </div>
+            <hr>`
         todos.append(newtask);
 
-        // Get the checkbox we just created
+        // Get  checkbox
         const checkbox = newtask.querySelector('input');
 
         // Listen for when it's clicked
@@ -60,6 +62,18 @@ function DisplayTodo() {
             const label = newtask.querySelector('label');
             label.classList.toggle('completed');
         })
+
+        const deleteBtn = newtask.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', function () {
+            // Remove from array
+            curTasks.splice(index, 1);
+
+            // Update localStorage
+            localStorage.setItem("todo", JSON.stringify(curTasks));
+
+            // Re-render the list
+            DisplayTodo();
+        });
     });
 }
 
