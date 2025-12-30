@@ -16,7 +16,7 @@
 
 <body>
     <div class="container-md">
-        <div class="todo-box shadow-sm">
+        <div class="todo-box">
             <h2 class="mb-4 fw-bold text-center">Simple To Do Planner <i class="bi bi-check2-square"></i></h2>
 
             <div class="input-group mb-4">
@@ -25,6 +25,11 @@
             </div>
 
             <ul id="todos" class="p-0"></ul>
+            <div class="d-flex justify-content-center">
+                <button id="clear-btn" class="btn clear-btn" onclick="clearCompleted()">
+                    clear completed <i class="bi bi-trash-fill"></i>
+                </button>
+            </div>
         </div>
     </div>
 
