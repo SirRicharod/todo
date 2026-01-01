@@ -35,6 +35,11 @@ todos.addEventListener('click', function (event) {
         const taskIndex = parseInt(target.closest('li').dataset.index);
         deleteTask(taskIndex);
     }
+    
+    if (target.closest('.edit-btn')) {
+        const taskIndex = parseInt(target.closest('li').dataset.index);
+        editTask(taskIndex);
+    }
 });
 
 todos.addEventListener('change', function (event) {
@@ -81,6 +86,75 @@ function deleteTask(index) {
     DisplayTodo();
 }
 
+function editTask(index) {
+    let curTasks = getTasks();
+    if (index < 0 || index >= curTasks.length) return;
+    
+    const taskElement = document.querySelector(`li[data-index="${index}"]`);
+    const labelElement = taskElement.querySelector('.form-check-label');
+    const currentText = curTasks[index].text;
+    
+    // Replace label with input field
+    const editInput = document.createElement('input');
+    editInput.type = 'text';
+    editInput.value = currentText;
+    editInput.className = 'form-control edit-input';
+    
+    labelElement.replaceWith(editInput);
+    editInput.focus();
+    editInput.select();
+    
+    // Hide edit button and show save/cancel buttons
+    const editBtn = taskElement.querySelector('.edit-btn');
+    const deleteBtn = taskElement.querySelector('.delete-btn');
+    editBtn.style.display = 'none';
+    deleteBtn.style.display = 'none';
+    
+    // Create save and cancel buttons
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn btn-success btn-sm save-btn';
+    saveBtn.innerHTML = '<i class="bi bi-check-lg"></i>';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'btn btn-secondary btn-sm cancel-btn';
+    cancelBtn.innerHTML = '<i class="bi bi-x-lg"></i>';
+    
+    const buttonContainer = taskElement.querySelector('.form-check');
+    buttonContainer.appendChild(saveBtn);
+    buttonContainer.appendChild(cancelBtn);
+    
+    // Save function
+    const saveEdit = () => {
+        const newText = editInput.value.trim();
+        if (newText === "") {
+            editInput.classList.add('is-invalid');
+            return;
+        }
+        curTasks[index].text = newText;
+        saveTasks(curTasks);
+        DisplayTodo();
+    };
+    
+    // Cancel function
+    const cancelEdit = () => {
+        DisplayTodo();
+    };
+    
+    // Event listeners
+    saveBtn.addEventListener('click', saveEdit);
+    cancelBtn.addEventListener('click', cancelEdit);
+    
+    editInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            saveEdit();
+        } else if (event.key === 'Escape') {
+            event.preventDefault();
+            cancelEdit();
+        }
+    });
+}
+
 function DisplayTodo() {
     let curTasks = getTasks();
 
@@ -103,6 +177,7 @@ function DisplayTodo() {
             `<div class="form-check">
                 <input class="form-check-input" type="checkbox" id="task-${index}" ${taskObj.completed ? 'checked' : ''}>
                 <label class="form-check-label ${taskObj.completed ? 'completed' : ''}" for="task-${index}"></label>
+                <button class="btn btn-warning btn-sm edit-btn"><i class="bi bi-pencil-fill"></i></button>
                 <button class="btn btn-danger btn-sm delete-btn"><i class="bi bi-trash-fill"></i></button>
             </div>
             <hr>`;
