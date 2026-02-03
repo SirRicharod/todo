@@ -21,12 +21,15 @@
 
             <div class="input-group mb-4">
                 <input type="text" placeholder="add a task..." id="todo-input" class="form-control todo-input">
-                <button class="btn" id="add-btn" onclick="AddTodo()">Add</button>
+                <button class="btn add-btn" id="add-btn" onclick="AddTodo()">Add</button>
             </div>
 
             <ul id="todos" class="p-0"></ul>
-            <div class="d-flex justify-content-center">
-                <button id="clear-btn" class="btn clear-btn" onclick="clearCompleted()">
+            <div class="d-flex justify-content-center gap-3">
+                <button  id="btn" class="btn clear-btn" onclick="selectAll()">
+                    select all <i class="bi bi-check-all"></i>
+                </button>
+                <button id="btn" class="btn clear-btn" onclick="clearCompleted()">
                     clear completed <i class="bi bi-trash-fill"></i>
                 </button>
             </div>

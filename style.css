@@ -3,6 +3,8 @@
     --accent-primary-hover: #5E61A8;
     --accent-secondary: #f43f5eff;
     --accent-secondary-hover: #A74D5F;
+    --accent-tertiary: rgb(244, 144, 63);
+    --accent-tertiary-hover: #a0612a;
     --text-main: #e5e7eb;
     --bg-card: #374151;
     --text-muted: #9ca3af;
@@ -33,7 +35,7 @@ body {
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.3) !important;
     margin: 0 auto;
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
 }
 
 .todo-input::placeholder {
@@ -59,20 +61,38 @@ body {
     box-shadow: none !important;
 }
 
+.started-text {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.empty-text {
+    font-size: 0.9rem;
+}
+
 .btn {
     color: white !important;
     background-color: var(--accent-primary) !important;
     border: 2px solid #4b5563 !important;
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-left: none !important;
+    padding: 0.4rem 0.6rem !important;
     transition: all 0.2s ease;
 }
 
 .btn:hover {
     background-color: var(--accent-primary-hover) !important;
+}
+
+.add-btn {
+    border-radius: var(--input-radius) !important;
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
+    border-left: none !important;
+}
+
+#add-btn {
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
     border-left: none !important;
 }
 
@@ -126,67 +146,59 @@ hr {
     text-decoration: line-through;
 }
 
-.edit-btn {
-    margin-left: auto !important;
-    background-color: var(--accent-primary) !important;
+/* Shared styles for small action buttons inside each task */
+.edit-btn,
+.delete-btn,
+.important-btn,
+.save-btn,
+.cancel-btn {
     border: none !important;
     color: white !important;
     border-radius: 8px !important;
-    padding: 0.4rem 0.6rem !important;
-    margin-right: 0.5rem !important;
     transition: all 0.2s ease !important;
 }
 
-.edit-btn:hover {
-    background-color: var(--accent-primary-hover) !important;
-    border: none !important;
-    border-radius: 8px !important;
+.edit-btn {
+    margin-left: auto !important;
+    margin-right: 0.5rem !important;
+    background-color: var(--accent-primary) !important;
 }
 
 .delete-btn {
     background-color: var(--accent-secondary) !important;
-    border: none !important;
-    color: white !important;
-    border-radius: 8px !important;
-    padding: 0.4rem 0.6rem !important;
-    transition: all 0.2s ease !important;
 }
 
-.delete-btn:hover {
-    background-color: var(--accent-secondary-hover) !important;
-    border: none !important;
-    border-radius: 8px !important;
+.important-btn {
+    background-color: var(--accent-tertiary) !important;
 }
 
 .save-btn {
     background-color: #10b981 !important;
-    border: none !important;
-    color: white !important;
-    border-radius: 8px !important;
-    padding: 0.4rem 0.6rem !important;
     margin-right: 0.5rem !important;
-    transition: all 0.2s ease !important;
-}
-
-.save-btn:hover {
-    background-color: #059669 !important;
-    border: none !important;
-    border-radius: 8px !important;
 }
 
 .cancel-btn {
     background-color: #6b7280 !important;
-    border: none !important;
-    color: white !important;
-    border-radius: 8px !important;
-    padding: 0.4rem 0.6rem !important;
-    transition: all 0.2s ease !important;
+}
+
+.edit-btn:hover {
+    background-color: var(--accent-primary-hover) !important;
+}
+
+.delete-btn:hover {
+    background-color: var(--accent-secondary-hover) !important;
+}
+
+.important-btn:hover {
+    background-color: var(--accent-tertiary-hover) !important;
+}
+
+.save-btn:hover {
+    background-color: #059669 !important;
 }
 
 .cancel-btn:hover {
     background-color: #4b5563 !important;
-    border: none !important;
-    border-radius: 8px !important;
 }
 
 .edit-input {
@@ -221,6 +233,22 @@ hr {
     border: none !important;
 }
 
+.border0 {
+    border-left: 0.65rem solid transparent !important;
+}
+
+.border1 {
+    border-left: 0.65rem solid rgb(187, 211, 89) !important;
+}
+
+.border2 {
+    border-left: 0.65rem solid rgb(241, 151, 66) !important;
+}
+
+.border3 {
+    border-left: 0.65rem solid rgb(246, 44, 95) !important;
+}
+
 @media (max-width: 576px) {
     body {
         padding-top: 20px;
@@ -230,10 +258,6 @@ hr {
 
     .todo-box {
         padding: 1.2rem;
-    }
-
-    .form-check {
-        padding: 0.75rem 1rem 0.75rem 2.5rem !important;
     }
 
     h2 {
