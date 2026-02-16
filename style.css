@@ -239,14 +239,20 @@ hr {
 
 .border1 {
     border-left: 0.65rem solid rgb(187, 211, 89) !important;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 .border2 {
     border-left: 0.65rem solid rgb(241, 151, 66) !important;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 .border3 {
     border-left: 0.65rem solid rgb(246, 44, 95) !important;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 @media (max-width: 576px) {
